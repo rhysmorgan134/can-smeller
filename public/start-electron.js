@@ -8,7 +8,7 @@ const path = require('path'),
     isDev = require('electron-is-dev');
 
 const CanSmeller = require('./cansmeller/CanSmeller')
-const cansmeller = new CanSmeller('vcan0')
+const cansmeller = new CanSmeller('can0')
 let startTime
 let endTime
 let interval

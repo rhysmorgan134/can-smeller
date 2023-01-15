@@ -14,10 +14,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "concurrently": "^7.6.0",
-    "electron": "^22.0.2",
-    "electron-builder": "^23.6.0",
     "electron-is-dev": "^2.0.0",
-    "electron-rebuild": "^3.2.9",
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
@@ -27,13 +24,18 @@
     "wait-on": "^7.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "electron-rebuild": "^3.2.9",
+    "electron": "^22.0.2",
+    "electron-builder": "^23.6.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-package": "./node_modules/.bin/electron-builder -c.extraMetadata.main=build/start-electron.js -mwl",
+    "electron-package": "./node_modules/.bin/electron-builder -c.extraMetadata.main=build/start-electron.js -l",
     "preelectron-package": "npm run build"
   },
   "eslintConfig": {
