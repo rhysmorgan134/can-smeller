@@ -4,6 +4,19 @@
   "private": true,
   "homepage": "./",
   "main": "./public/start-electron.js",
+  "build":{
+    "compression": "normal",
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "armv7l", "arm64"
+          ]
+        }
+      ]
+    }
+  },
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -25,7 +38,6 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "electron-rebuild": "^3.2.9",
     "electron": "^22.0.2",
     "electron-builder": "^23.6.0"
   },
@@ -35,8 +47,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-package": "./node_modules/.bin/electron-builder -c.extraMetadata.main=build/start-electron.js -l",
-    "preelectron-package": "npm run build"
+    "electron-package": "electron-builder build -c.extraMetadata.main=build/start-electron.js --linux",
+    "preelectron-package": "npm run build",
+    "pi32-build": "electron-builder build -c.extraMetadata.main=build/start-electron.js --armv7l --linux AppImage --dir",
+    "pi64-build": "electron-builder build -c.extraMetadata.main=build/start-electron.js --arm64 --linux AppImage --dir"
   },
   "eslintConfig": {
     "extends": [

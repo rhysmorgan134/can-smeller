@@ -53,7 +53,7 @@ export default function() {
     const [snifferResults, setSnifferResults] = React.useState({})
     const [sniffing, setSniffing] = React.useState(false)
     let interval;
-
+    const [msRecording, setMsRecording] = React.useState(false)
     useEffect(() => {
         ipcRenderer.on('learning', (event, args) => {
             setLearning(args)
@@ -158,6 +158,15 @@ export default function() {
         return <Sniffer id={data} data={snifferResults[data]} />
     }
 
+    const recorderMS = () => {
+        if (!msRecording){
+        ipcRenderer.send('process', {type: 'recorderMS', action: 'start'})
+        setMsRecording(true);
+        } else {
+        ipcRenderer.send('process', {type: 'recorderMS', action: 'stop'})
+        setMsRecording(false);
+        } 
+    }
     const exampleData = {
         taughtCountBytes: 0,
         prevTaughtBytes: 0,
@@ -182,6 +191,7 @@ export default function() {
                         <Button xs={'large'} disabled={learning} onClick={() => beginTiming()}>Begin</Button>
                         <Button xs={'large'} disabled={!learning} onClick={() => startSmelling()}>Smell</Button>
                         <Button xs={'large'} disabled={!filters.length > 0} onClick={() => startSniffing()}>Sniffer</Button>
+                        <Button color={!msRecording ? "success":"error"} xs={'large'} onClick={() => recorderMS()}>{msRecording ? "End" : "Start"} MS Recording</Button>
                     </Paper>
                 </Grid>
             </Grid>
