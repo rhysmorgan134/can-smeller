@@ -9,13 +9,15 @@ const path = require('path'),
 
 const CanSmeller = require('./cansmeller/CanSmeller')
 const cansmeller = new CanSmeller('can0')
+const { exec } = require("child_process");
+
 let startTime
 let endTime
 let interval
 let statsInterval
 let mainWindow;
 let snifferResults = {}
-
+let recorder;
 const createWindow = () => {
     mainWindow = new BrowserWindow({ width: 1100, height: 640, frame: false, webPreferences: {
             nodeIntegration: true,
@@ -43,6 +45,13 @@ app.on('activate', () => {
 
 ipcMain.on('process', (event, data) => {
     switch(data.type) {
+        case 'recorderMS':
+            if(data.action === "start") {
+                recorder = exec("candump -l can0");
+            } else {
+                recorder.kill('SIGINT')
+            }
+            break;
         case 'button':
             cansmeller.buttonFind()
             statsInterval = setInterval(() => {
