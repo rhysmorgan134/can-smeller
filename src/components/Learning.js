@@ -24,7 +24,7 @@ export default function({data}) {
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem>
-                <ListItemText primary="Learnt IDs last interval" secondary={data.taughtBytesInterval} primaryTypographyProps={{align: 'center'}} secondaryTypographyProps={{align: 'center'}}/>
+                <ListItemText primary="Learnt Bytes last interval" secondary={data.taughtBytesInterval} primaryTypographyProps={{align: 'center'}} secondaryTypographyProps={{align: 'center'}}/>
             </ListItem>
             <Divider variant="inset" component="li" />
         </List>
